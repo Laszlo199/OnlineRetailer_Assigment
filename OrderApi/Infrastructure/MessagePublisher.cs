@@ -41,7 +41,7 @@ namespace OrderApi.Infrastructure
             var message = new OrderStatusChangedMessage
             {
                 OrderId = id,
-                OrderLine = orderLine,
+                OrderLine = orderLine
             };
             bus.PubSub.Publish(message, x =>
             {

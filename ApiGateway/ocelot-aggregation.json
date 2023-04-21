@@ -1,0 +1,44 @@
+﻿{
+  "Routes": [
+    {
+      
+      "DownstreamPathTemplate": "/products",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/productapi/products",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "allproducts"
+    },
+    {
+      "DownstreamPathTemplate": "/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/orderapi/orders",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "allorders"
+    },
+    {
+      "DownstreamPathTemplate": "/products/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/productapi/products/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "product"
+    }
+  ]
+}
