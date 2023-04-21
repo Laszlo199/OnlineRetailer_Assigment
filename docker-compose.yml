@@ -1,6 +1,10 @@
 version: '3.4'
 
 services:
+  apigateway:
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
   customerapi:
     build:
       context: .
@@ -25,6 +29,18 @@ services:
       - 8002:80
     depends_on:
       - rabbitmq
+  prometheus:
+    build:
+      context: .
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
   rabbitmq:
     image: rabbitmq:3-management
     ports:

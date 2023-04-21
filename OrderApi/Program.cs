@@ -8,6 +8,7 @@ using OrderApi.Infrastructure;
 using OrderApi.Models;
 using SharedModels;
 using Order = OrderApi.Models.Order;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,7 +50,9 @@ using (var scope = app.Services.CreateScope())
 Task.Factory.StartNew(() => new MessageListener(app.Services, cloudAMQPConnectionString).Start());
 
 app.UseAuthorization();
-
+app.UseHttpMetrics();
 app.MapControllers();
+
+app.MapMetrics();
 
 app.Run();
