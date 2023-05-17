@@ -11,6 +11,12 @@ using Order = OrderApi.Models.Order;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Base URL for the product service when the solution is executed using docker-compose.
+// The product service (running as a container) listens on this URL for HTTP requests
+// from other services specified in the docker compose file (which in this solution is
+// the order service).
+string productServiceBaseUrl = "http://productapi/products/";
+
 // Add services to the container.
 
 string cloudAMQPConnectionString =
@@ -23,6 +29,8 @@ builder.Services.AddSingleton<IOrderConverter, OrderConverter>();
 // Register database initializer for dependency injection
 builder.Services.AddTransient<IDbInitializer, DbInitializer>();
 builder.Services.AddSingleton<IMessagePublisher>(new MessagePublisher(cloudAMQPConnectionString));
+// Register product service gateway for dependency injection
+builder.Services.AddSingleton<IServiceGateway<ProductDto>>(new ProductServiceGateway(productServiceBaseUrl));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

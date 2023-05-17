@@ -1,14 +1,13 @@
 ﻿using RestSharp;
 using SharedModels;
-using System;
 
 namespace OrderApi.Infrastructure
 {
     public class ProductServiceGateway: IServiceGateway<ProductDto>
     {
-        Uri productServiceBaseUrl;
+        string productServiceBaseUrl;
 
-        public ProductServiceGateway(Uri baseUrl)
+        public ProductServiceGateway(string baseUrl)
         {
             productServiceBaseUrl = baseUrl;
         }
