@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   customerapi:
-    image: ${DOCKER_REGISTRY-}productapi
+    image: laszlo199/productapi
     build:
       context: .
       dockerfile: CustomersApi/Dockerfile
@@ -11,7 +11,7 @@ services:
     depends_on:
       - rabbitmq
   orderapi:
-    image: ${DOCKER_REGISTRY-}orderapi
+    image: laszlo199/orderapi
     build:
       context: .
       dockerfile: OrderApi/Dockerfile
@@ -20,7 +20,7 @@ services:
     depends_on:
       - rabbitmq
   productapi:
-    image: ${DOCKER_REGISTRY-}productapi
+    image: laszlo199/productapi
     build:
       context: .
       dockerfile: ProductApi/Dockerfile
